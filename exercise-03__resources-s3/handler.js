@@ -6,10 +6,10 @@ module.exports.hello = async (event, context) => {
   let s3 = new AWS.S3();
 
   console.log(process.env.BUCKET);
+  
+  let filename = `${new Date().getUTCMilliseconds()}.txt`;
 
-  var filename = `${new Date().getUTCMilliseconds}.txt`;
-
-  var params = {
+  let params = {
     Body: 'success', 
     Bucket: process.env.BUCKET, 
     Key: filename,

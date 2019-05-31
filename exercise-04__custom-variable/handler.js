@@ -7,9 +7,9 @@ module.exports.hello = async (event, context) => {
 
   console.log(process.env.BUCKET);
 
-  var filename = `${new Date().getUTCMilliseconds}.txt`;
+  let filename = `${new Date().getUTCMilliseconds()}.txt`;
 
-  var params = {
+  let params = {
     Body: 'success', 
     Bucket: process.env.BUCKET, 
     Key: filename,
