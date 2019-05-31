@@ -1,0 +1,38 @@
+
+service: hello-world # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+  iamRoleStatements:
+   - Effect: Allow
+     Action:
+       - s3:PutObject
+       - s3:PutObjectAcl
+     Resource: "arn:aws:s3:::${self:custom.bucket.${self:provider.stage}}/*"
+
+
+functions:
+  hello:
+    handler: handler.hello
+    environment:
+      BUCKET: ${self:custom.bucket.${self:provider.stage}}
+    events:
+      - http:
+          path: /hello
+          method: GET
+      - http:
+          path: /{any+}
+          method: GET
+
+resources: 
+  # S3
+  - ${file(resources/s3-bucket.yml)}
+
+custom: 
+  bucket:
+    dev: jedi-bucket-dev
+    staging: jedi-bucket-staging

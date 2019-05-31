@@ -59,3 +59,9 @@ typings/
 
 # next.js build output
 .next
+
+# Editor files
+.DS_Store
+
+# Serverless directories
+.serverless

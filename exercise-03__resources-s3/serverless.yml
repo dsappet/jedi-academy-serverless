@@ -1,0 +1,53 @@
+
+service: hello-world # NOTE: update this with your service name
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+  stage: dev
+  region: eu-west-1
+  iamRoleStatements:
+   - Effect: Allow
+     Action:
+       - s3:PutObject
+       - s3:PutObjectAcl
+     Resource: "arn:aws:s3:::jedi-bucket/*"
+
+
+functions:
+  hello:
+    handler: handler.hello
+    environment:
+      BUCKET: jedi-bucket
+    events:
+      - http:
+          path: /hello
+          method: GET
+      - http:
+          path: /{any+}
+          method: GET
+
+resources: 
+  Resources: 
+    JediBucket: 
+      Type: AWS::S3::Bucket 
+      Properties: 
+        BucketName: jedi-bucket 
+        AccessControl: Private 
+        CorsConfiguration: 
+          CorsRules: 
+            - AllowedMethods: 
+              - GET 
+              - PUT 
+              - POST 
+              - HEAD 
+              AllowedOrigins: 
+              - "*" 
+              AllowedHeaders: 
+              - "*"
+  # Print out the name of the bucket that is created
+  Outputs:
+    JediS3BucketName:
+      Value:
+        Ref: JediBucket

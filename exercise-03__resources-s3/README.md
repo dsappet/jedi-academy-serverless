@@ -1,0 +1,1 @@
+# Part 03 - Resources - S3 bucket

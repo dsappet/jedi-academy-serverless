@@ -1,0 +1,22 @@
+Resources: 
+    JediBucket: 
+      Type: AWS::S3::Bucket 
+      Properties: 
+        BucketName: ${self:custom.bucket.${self:provider.stage}} 
+        AccessControl: Private 
+        CorsConfiguration: 
+          CorsRules: 
+            - AllowedMethods: 
+              - GET 
+              - PUT 
+              - POST 
+              - HEAD 
+              AllowedOrigins: 
+              - "*" 
+              AllowedHeaders: 
+              - "*"
+  # Print out the name of the bucket that is created
+  Outputs:
+    JediS3BucketName:
+      Value:
+        Ref: JediBucket
