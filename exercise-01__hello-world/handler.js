@@ -19,7 +19,7 @@ module.exports.hello = async (event, context) => {
 function isItSaturday() { 
   var day = new Date().getDay();
   console.log(day);
-  if(day == 'Saturday') return true;
+  if(day == 5) return true;
 
   return false;
 }

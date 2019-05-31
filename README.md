@@ -5,9 +5,16 @@ This is a repo of code examples to go along with the Jedi Academy serverless fra
 Use the cli template to generate a new serverless project and deploy it to AWS. Invoke, update, and log the function. 
 
 ## Exercise 02 - Make the function event driven
-
+Learn how to invoke a function when an http event is made. 
 
 ## Exercise 03 - Add some resources
+Add an S3 bucket to serverless architecture and write a file to it from our lambda. All permissions associated with deploying and writing are included.
+
+## Exercise 04 - Custom variables and organizing configuration
+Use custom variables to avoid repeating hardcoded values as well as set up different values across environments with stage. 
+
+## Exercise 05 - Using plugins
+Quickly learn how to add one of the most useful plugins available.
 
 
 # The slides
