@@ -1,0 +1,39 @@
+
+service: hello-world
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+  iamRoleStatements:
+    - Effect: "Allow" # For canary deploy plugin
+      Action:
+        - codedeploy:*
+      Resource:
+        - "*"
+
+
+plugins:
+  - serverless-plugin-optimize
+  - serverless-plugin-canary-deployments
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /hello
+          method: GET
+      - http:
+          path: /{any+}
+          method: GET
+    deploymentSettings:
+      type: AllAtOnce
+      alias: Live
+  preHook:
+    handler: hooks.pre
+  postHook:
+    handler: hooks.post
+
