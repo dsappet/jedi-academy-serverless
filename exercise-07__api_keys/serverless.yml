@@ -1,0 +1,63 @@
+
+service: hello-world
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+
+  # Simplest form. This will print the key out to the console on deploy for you.
+  # apiKeys:
+  #   - mySimpleKey
+
+  apiKeys:
+    - free:
+        - myFreeKey # static key across all stages
+        - ${opt:stage}-myFreeKey # Different API keys for each deployed stage
+    - paid:
+        - myPaidKey
+        - ${opt:stage}-myPaidKey
+  usagePlan:
+    - free:
+        quota:
+          limit: 500
+          offset: 2
+          period: MONTH
+        throttle:
+          burstLimit: 200
+          rateLimit: 100
+    - paid:
+        quota:
+          limit: 50000
+          offset: 1
+          period: MONTH
+        throttle:
+          burstLimit: 2000
+          rateLimit: 1000
+
+
+plugins:
+  - serverless-plugin-optimize
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: /hello
+          method: GET
+      - http:
+          path: /hello
+          method: POST
+          private: true # Protect posting info with apikeys
+          
+      - http:
+          path: /{any+}
+          method: GET
+
+custom:
+  stages:
+    - staging
+    - prod
