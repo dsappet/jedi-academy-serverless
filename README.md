@@ -19,6 +19,9 @@ Quickly learn how to add one of the most useful plugins available.
 ## Exercise 06 - Deploy traffic hooks
 Pre and post traffic hooks run lambda functions before and after traffic has been directed to a newly deployed lambda. This is great for running real e2e tests. Other tricky applications exist as well like "warming" a lambda before traffic is directed to it. This is great for lambdas that exist behind a VPC and require warming. 
 
+## Exercise 07 - Protect your lambda with API Keys
+Serverless provides a very simple and easy to use configuration for generating and implementing API Keys. 
+
 
 # The slides
 <https://docs.google.com/presentation/d/13Ro7OQ60D_NOmgVO3vHbKHKpbb7bG5eIaaTS8jcotyI>
