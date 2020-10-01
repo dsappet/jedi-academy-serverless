@@ -22,6 +22,8 @@ Pre and post traffic hooks run lambda functions before and after traffic has bee
 ## Exercise 07 - Protect your lambda with API Keys
 Serverless provides a very simple and easy to use configuration for generating and implementing API Keys. 
 
+# Future exercises
+* Provisioning - keep warm lambdas for high availability
 
 # The slides
 <https://docs.google.com/presentation/d/13Ro7OQ60D_NOmgVO3vHbKHKpbb7bG5eIaaTS8jcotyI>
